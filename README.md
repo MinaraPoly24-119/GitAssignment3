@@ -1,36 +1,48 @@
-#include<stdio.h> 
+#include <stdio.h>
 
-int main(){
-    int marks[3][3]={{50,60,70},{80,90,100},{30,40,50}};
-    char students[3][10]={"Ali","Bob","Cat"};
-    int i,j,sum;
-    float avg; 
-    for(i=0;i<3;i++){
-        sum=0;
-        for(j=0;j<3;j++){
-            sum+=marks[i][j];
-        }
-        avg=sum/3.0;
-        if(avg>=80)
-            printf("%s Grade A avg=%.2f\n",students[i],avg);
-        else if(avg>=60)
-            printf("%s Grade B avg=%.2f\n",students[i],avg);
-        else if(avg>=40)
-            printf("%s Grade C avg=%.2f\n",students[i],avg);
-        else 
-            printf("%s Fail avg=%.2f\n",students[i],avg);
-    }
-    int maximum=0,position=0;
-    for(i=0;i<3;i++){
-        sum=0;
-        for(j=0;j<3;j++){
-            sum+=marks[i][j];
-        }
-        if(sum>maximum){
-            maximum=sum;
-            position=i;
-        }
-    }
-    printf("Topper: %s with total %d\n",students[position],maximum);
-return 0;
+int summation(int a, int b, int c) {
+    return a + b + c;
 }
+
+void average(int total, char *name) {
+    float avg = total / 3.0;
+
+    if (avg >= 80)
+        printf("%s: Grade A (avg = %.2f)\n", name, avg);
+    else if (avg >= 60)
+        printf("%s: Grade B (avg = %.2f)\n", name, avg);
+    else if (avg >= 40)
+        printf("%s: Grade C (avg = %.2f)\n", name, avg);
+    else
+        printf("%s: Fail (avg = %.2f)\n", name, avg);
+}
+
+int main() {
+    int marks[3][3] = {
+        {50, 60, 70},
+        {80, 90, 100},
+        {30, 40, 50}
+    };
+    char students[3][10] = {"Ali", "Bob", "Cat"};
+
+    int i, sum;
+    int maximum = 0, position = 0;
+
+    for (i = 0; i < 3; i++) {
+        sum = summation(marks[i][0], marks[i][1], marks[i][2]);
+        average(sum, students[i]);
+    }
+
+    for (i = 0; i < 3; i++) {
+        sum = summation(marks[i][0], marks[i][1], marks[i][2]);
+        if (sum > maximum) {
+            maximum = sum;
+            position = i;
+        }
+    }
+
+    printf("\nTopper: %s with total %d\n", students[position], maximum);
+
+    return 0;
+}
+
